@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { api } from '../../utils/api';
-import { TodosList } from './TodosList/TodosList';
-import { AddToDoFrom } from './AddToDoForm/AddToDoForm';
+import { api } from "../../utils/api";
+import { TodosList } from "./TodosList/TodosList";
+import { AddToDoFrom } from "./AddToDoForm/AddToDoForm";
 
 function Todos() {
   const [todos, setTodos] = useState([]);
@@ -23,20 +23,21 @@ function Todos() {
   }, []);
 
   const initialValues = {
-    description: ""
+    description: "",
   };
 
   const handleSubmit = async (values, { resetForm }) => {
-    await api.post("/task", {"description": values.description});
+    await api.post("/task", { description: values.description });
     fetchTodos();
     resetForm({});
-    console.log(values.description);
   };
 
   return (
-    <><TodosList todos={todos} />
-    <AddToDoFrom initialValues={ initialValues } handleSubmit={ handleSubmit }/></>
-  )
+    <>
+      <TodosList todos={todos} />
+      <AddToDoFrom initialValues={initialValues} handleSubmit={handleSubmit} />
+    </>
+  );
 }
 
 export default Todos;
