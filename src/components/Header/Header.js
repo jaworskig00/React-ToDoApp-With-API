@@ -1,3 +1,3 @@
 export const Header = () => {
-  return <header class="text-xl font-bold">TODO LIST</header>;
+  return <header className="text-xl font-bold">TODO LIST</header>;
 };
