@@ -36,26 +36,26 @@ function App() {
   };
 
   return (
-    <div>
-      <header>TODO LIST</header>
+    <div class="p-6 max-w-lg mx-auto bg-white rounded-xl shadow-lg items-center space-y-4">
+      <header class="text-xl font-bold">TODO LIST</header>
       <main>
         <ul>
           {todos.length ? (
             todos.map((todo) => {
-              return <li key={todo.id}>{todo.description}</li>; //Id: {todo._id}
+              return <li class="bg-orange-200 rounded-full text-left m-1 pl-2 py-0.5 min-w-max" key={todo.id}>{todo.description}</li>; //Id: {todo._id}
             })
           ) : (
-            <li>No todos yet</li>
+            <li class="bg-orange-200 rounded-full text-left m-1 pl-2">No todos yet</li>
           )}
         </ul>
       </main>
-      <aside style={{ paddingLeft: "10px" }}>
+      <aside class="border rounded-lg p-3">
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
           <Form>
-            <label htmlFor="description">Add description of task</label>
+            <label class="underline" htmlFor="description">Add new task</label>
             <br/>
-            <Field name="description" type="text" placeholder="description" />
-            <button type="submit">Add</button>
+            <Field class=" py-1 px-3 m-2 placeholder:italic bg-white border rounded-full" name="description" type="text" placeholder="Description" />
+            <button class="px-3 py-1 m-2 text-sm text-purple-600 font-semibold border rounded-full border-purple-200 hover:text-white hover:bg-purple-600" type="submit">Add</button>
           </Form>
         </Formik>
       </aside>
