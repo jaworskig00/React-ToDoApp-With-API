@@ -22,6 +22,7 @@ function App() {
 
   useEffect(() => {
     fetchTodos();
+    console.error('it didnt work')
   }, []);
 
   const initialValues = {
