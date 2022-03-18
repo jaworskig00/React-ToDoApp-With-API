@@ -1,4 +1,4 @@
-export const BlankPage = () => {
+export const BlankScreen = () => {
   return (
     <>
       <div className="h-full w-full flex">
