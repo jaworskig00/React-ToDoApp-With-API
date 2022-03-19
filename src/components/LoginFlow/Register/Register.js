@@ -1,4 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Link } from "react-router-dom";
 
 function Register({ handleSwitch }) {
   const initialValues = {
@@ -46,7 +47,7 @@ function Register({ handleSwitch }) {
               className="px-3 py-1 m-2 text-sm text-purple-600 font-semibold border rounded-full border-purple-200 hover:text-white hover:bg-purple-600"
               type="submit"
             >
-              Register
+              <Link to={"/todos"}>Register</Link>
             </button>
             <button
               className="underline"

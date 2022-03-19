@@ -4,15 +4,15 @@ import Register from "../components/LoginFlow/Register/Register";
 import Login from "../components/LoginFlow/Login/Login";
 
 function LoginScreen() {
-  const [isRegistred, setIsRegistred] = useState(false);
+  const [currentTab, setCurrentTab] = useState("register");
 
   const handleSwitch = () => {
-    setIsRegistred(!isRegistred);
+    currentTab == "register" ? setCurrentTab("login") : setCurrentTab("register");
   };
 
   return (
     <div>
-      {!isRegistred ? (
+      {currentTab == "register" ? (
         <Register handleSwitch={handleSwitch} />
       ) : (
         <Login handleSwitch={handleSwitch} />

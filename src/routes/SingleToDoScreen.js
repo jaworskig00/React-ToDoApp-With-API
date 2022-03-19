@@ -12,7 +12,7 @@ export const SingleToDoScreen = () => {
   useEffect(() => {
     const fetchTodo = async () => {
       try {
-        const { data } = await api.get("/task/" + id.substring(3));
+        const { data } = await api.get("/task/" + id);
         if (data.data) {
           setTodo(data.data);
         }
@@ -28,7 +28,7 @@ export const SingleToDoScreen = () => {
     <Wrapper>
       <main className="flex flex-col items-center">
         <span className="underline text-lg font-bold">
-          ToDo ID: {id.substring(3)}
+          ToDo ID: {id}
         </span>
         <span className="bg-orange-200 rounded-full m-1 pl-2 py-0.5 min-w-full text-center">
           {todo.description}
