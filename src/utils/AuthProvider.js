@@ -2,6 +2,7 @@ import React, { useContext, createContext, useState } from "react";
 import { useLocation, useNavigate, Navigate } from "react-router-dom";
 
 import { publicApi, privateApi } from "./api";
+import { Wrapper } from "../components/Wrapper/Wrapper";
 
 export const AuthContext = createContext({
   isAuthenticated: false,
@@ -46,8 +47,8 @@ export function AuthProvider({ children }) {
     } catch (err) {
       console.error(err);
     }
-    
-    navigate(from, {replace: true});
+
+    navigate(from, { replace: true });
   };
 
   const signOut = async () => {
@@ -73,16 +74,22 @@ export function RequireAuth({ children }) {
 
   if (!auth.isAuthenticated) {
     return (
-      <div>
-        <h1>Please register/login first</h1>
-        <br />
-        <button
-          type="button"
-          onClick={() => navigate("/", { state: { from: location }, replace: undefined })}
-        >
-          Register/Login
-        </button>
-      </div>
+      <Wrapper>
+        <main className="flex flex-col items-center border rounded-lg p-3">
+          <span className="underline text-lg font-bold">
+            Please register or login first
+          </span>
+          <button
+            type="button"
+            className="px-3 py-1 m-2 text-sm text-purple-600 font-semibold border rounded-full border-purple-200 hover:text-white hover:bg-purple-600"
+            onClick={() =>
+              navigate("/", { state: { from: location }, replace: undefined })
+            }
+          >
+            Register/Login
+          </button>
+        </main>
+      </Wrapper>
     );
   }
 
