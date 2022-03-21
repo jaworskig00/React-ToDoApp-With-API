@@ -1,11 +1,11 @@
+import { useContext } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Link, useNavigate } from "react-router-dom";
 
-import { api } from "../../../utils/api";
+import { AuthContext } from "../../../utils/AuthProvider";
 
 function Register({ handleSwitch }) {
-  const navigate = useNavigate();
+  const auth = useContext(AuthContext);
 
   const initialValues = {
     name: "",
@@ -35,7 +35,7 @@ function Register({ handleSwitch }) {
         <Formik
           initialValues={initialValues}
           validationSchema={RegisterSchema}
-          /*onSubmit={handleSubmit}*/
+          onSubmit={auth.handleRegisterSubmit}
         >
           {({ errors, touched, isValid, dirty }) => (
             <Form className="min-w-max mx-auto flex items-center flex-col">
@@ -95,9 +95,6 @@ function Register({ handleSwitch }) {
                 className="px-3 py-1 m-2 text-sm text-purple-600 font-semibold border rounded-full border-purple-200 hover:text-white hover:bg-purple-600"
                 type="submit"
                 disabled={!(dirty && isValid)}
-                onClick={() => {
-                  navigate("/todos");
-                }}
               >
                 Register
               </button>

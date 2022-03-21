@@ -1,7 +1,16 @@
+import { useContext } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+
+import { AuthContext } from "../../../utils/AuthProvider";
 
 function Login({ handleSwitch }) {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
   const initialValues = {
     email: "",
     password: "",
@@ -10,7 +19,10 @@ function Login({ handleSwitch }) {
   return (
     <div className="p-6 max-w-lg mx-auto bg-white rounded-xl shadow-lg items-center space-y-4">
       <aside className="border rounded-lg p-3">
-        <Formik initialValues={initialValues} /*onSubmit={handleSubmit}*/>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={auth.signIn}
+        >
           <Form className="min-w-max mx-auto flex items-center flex-col">
             <label className="text-2xl underline mx-auto" htmlFor="description">
               Please login
@@ -33,12 +45,12 @@ function Login({ handleSwitch }) {
               className="px-3 py-1 m-2 text-sm text-purple-600 font-semibold border rounded-full border-purple-200 hover:text-white hover:bg-purple-600"
               type="submit"
             >
-              <Link to={"/todos"}>Login</Link>
+              Login
             </button>
             <button
               className="underline"
               name="switchButton"
-              type="text"
+              type="button"
               onClick={() => {
                 handleSwitch();
               }}

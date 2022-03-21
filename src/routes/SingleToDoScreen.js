@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { api } from "../utils/api";
+import { privateApi } from "../utils/api";
 import { Wrapper } from "../components/Wrapper/Wrapper";
 
 export const SingleToDoScreen = () => {
@@ -12,7 +12,7 @@ export const SingleToDoScreen = () => {
   useEffect(() => {
     const fetchTodo = async () => {
       try {
-        const { data } = await api.get("/task/" + id);
+        const { data } = await privateApi.get("/task/" + id);
         if (data.data) {
           setTodo(data.data);
         }
