@@ -9,7 +9,7 @@ function Todos() {
 
   const fetchTodos = async () => {
     try {
-      const { data } = await privateApi.get("/task");
+      const { data } = await privateApi(localStorage.getItem("token")).get("/task");
       if (data.data) {
         setTodos(data.data);
       }
@@ -27,7 +27,7 @@ function Todos() {
   };
 
   const handleSubmit = async (values, { resetForm }) => {
-    await privateApi.post("/task", { description: values.description });
+    await privateApi(localStorage.getItem("token")).post("/task", { description: values.description });
     fetchTodos();
     resetForm({});
   };

@@ -53,7 +53,7 @@ export function AuthProvider({ children }) {
 
   const signOut = async () => {
     try {
-      await privateApi.post("/user/logout");
+      await privateApi(localStorage.getItem("token")).post("/user/logout");
       setIsAuthenticated(false);
     } catch (err) {
       console.error(err);
