@@ -12,7 +12,7 @@ export const SingleToDoScreen = () => {
   useEffect(() => {
     const fetchTodo = async () => {
       try {
-        const { data } = await privateApi.get("/task/" + id);
+        const { data } = await privateApi(localStorage.getItem("token")).get("/task/" + id);
         if (data.data) {
           setTodo(data.data);
         }
