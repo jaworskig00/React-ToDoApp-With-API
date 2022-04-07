@@ -9,20 +9,15 @@ import { DeleteSingleToDo } from "../components/Todos/TodosList/ToDoListItem/Del
 
 export const SingleToDoScreen = () => {
   const [todo, setTodo] = useState([]);
-  const [tab, setTab] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const { id } = useParams();
 
   useEffect(() => {
     const fetchTodo = async () => {
       try {
-<<<<<<< HEAD
         const { data } = await api.get("/task/" + id);
-=======
-        const { data } = await privateApi(localStorage.getItem("token")).get(
-          "/task/" + id
-        );
->>>>>>> 2b2278a (Added todos editing and deleting functionality (without API yet))
         if (data.data) {
           setTodo(data.data);
         }
