@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { privateApi } from "../utils/api";
+import { api } from "../utils/api";
 import { Wrapper } from "../components/Wrapper/Wrapper";
 
 export const SingleToDoScreen = () => {
@@ -12,7 +12,7 @@ export const SingleToDoScreen = () => {
   useEffect(() => {
     const fetchTodo = async () => {
       try {
-        const { data } = await privateApi(localStorage.getItem("token")).get("/task/" + id);
+        const { data } = await api.get("/task/" + id);
         if (data.data) {
           setTodo(data.data);
         }

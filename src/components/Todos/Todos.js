@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { privateApi } from "../../utils/api";
+import { api } from "../../utils/api";
 import { TodosList } from "./TodosList/TodosList";
 import { AddToDoFrom } from "./AddToDoForm/AddToDoForm";
 
@@ -9,7 +9,7 @@ function Todos() {
 
   const fetchTodos = async () => {
     try {
-      const { data } = await privateApi(localStorage.getItem("token")).get("/task");
+      const { data } = await api.get("/task");
       if (data.data) {
         setTodos(data.data);
       }
@@ -27,7 +27,7 @@ function Todos() {
   };
 
   const handleSubmit = async (values, { resetForm }) => {
-    await privateApi(localStorage.getItem("token")).post("/task", { description: values.description });
+    await api.post("/task", { description: values.description });
     fetchTodos();
     resetForm({});
   };

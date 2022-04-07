@@ -1,7 +1,7 @@
 import React, { useContext, createContext, useState } from "react";
 import { useLocation, useNavigate, Navigate } from "react-router-dom";
 
-import { publicApi, privateApi } from "./api";
+import { api } from "./api";
 import { Wrapper } from "../components/Wrapper/Wrapper";
 
 export const AuthContext = createContext({
@@ -20,7 +20,7 @@ export function AuthProvider({ children }) {
 
   const handleRegisterSubmit = async (values) => {
     try {
-      const { data } = await publicApi.post("/user/register", {
+      const { data } = await api.post("/user/register", {
         name: values.name,
         email: values.email,
         password: values.password,
@@ -36,7 +36,7 @@ export function AuthProvider({ children }) {
 
   const signIn = async (values) => {
     try {
-      const { data } = await publicApi.post("/user/login", {
+      const { data } = await api.post("/user/login", {
         email: values.email,
         password: values.password,
       });
@@ -53,7 +53,7 @@ export function AuthProvider({ children }) {
 
   const signOut = async () => {
     try {
-      await privateApi(localStorage.getItem("token")).post("/user/logout");
+      await api.post("/user/logout");
       setIsAuthenticated(false);
     } catch (err) {
       console.error(err);
