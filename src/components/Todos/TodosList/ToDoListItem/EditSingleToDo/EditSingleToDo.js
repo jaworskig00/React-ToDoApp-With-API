@@ -1,7 +1,10 @@
 import { Formik, Form, Field } from "formik";
 
+<<<<<<< HEAD
 import { Button } from "../../../../Button/Button";
 
+=======
+>>>>>>> 49f364d (Moved handle funcions to edit and delete components)
 export const EditSingleToDo = ({ handleEditCancel }) => {
   const initialValues = {
     description: "",

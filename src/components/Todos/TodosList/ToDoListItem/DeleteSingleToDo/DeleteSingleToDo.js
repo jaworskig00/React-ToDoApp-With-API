@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 import { Button } from "../../../../Button/Button";
 
+=======
+>>>>>>> 49f364d (Moved handle funcions to edit and delete components)
 export const DeleteSingleToDo = ({ handleDeleteCancel }) => {
   const handleDelete = () => {
     handleDeleteCancel();

@@ -26,7 +26,11 @@ export const SingleToDoScreen = () => {
     };
 
     fetchTodo();
+<<<<<<< HEAD
   }, [todo]);
+=======
+  }, []);
+>>>>>>> 49f364d (Moved handle funcions to edit and delete components)
 
   return (
     <Wrapper>
@@ -43,8 +47,11 @@ export const SingleToDoScreen = () => {
         />
         {tab === "edit" ? (
           <EditSingleToDo
+<<<<<<< HEAD
             toDoId={id}
             description={todo.description}
+=======
+>>>>>>> 49f364d (Moved handle funcions to edit and delete components)
             handleEditCancel={() => {
               setTab(null);
             }}
@@ -52,7 +59,10 @@ export const SingleToDoScreen = () => {
         ) : null}
         {tab === "delete" ? (
           <DeleteSingleToDo
+<<<<<<< HEAD
             toDoId={id}
+=======
+>>>>>>> 49f364d (Moved handle funcions to edit and delete components)
             handleDeleteCancel={() => {
               setTab(null);
             }}
