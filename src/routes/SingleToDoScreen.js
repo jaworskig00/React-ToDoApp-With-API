@@ -9,8 +9,7 @@ import { DeleteSingleToDo } from "../components/Todos/TodosList/ToDoListItem/Del
 
 export const SingleToDoScreen = () => {
   const [todo, setTodo] = useState([]);
-  const [isEditing, setIsEditing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [tab, setTab] = useState(null);
 
   const { id } = useParams();
 
@@ -35,16 +34,6 @@ export const SingleToDoScreen = () => {
     fetchTodo();
   }, []);
 
-  const handleEdit = () => {
-    console.log("Task updated");
-    setIsEditing(false);
-  }; // obsługa edycji z api
-
-  const handleDelete = () => {
-    console.log("Task deleted");
-    setIsDeleting(false);
-  }; // obsługa usuwania z api
-
   return (
     <Wrapper>
       <main className="flex flex-col items-center">
@@ -52,27 +41,23 @@ export const SingleToDoScreen = () => {
           toDoId={id}
           toDo={todo}
           handleEdit={() => {
-            setIsEditing(true);
-            setIsDeleting(false);
+            setTab("edit");
           }}
           handleDelete={() => {
-            setIsEditing(false);
-            setIsDeleting(true);
+            setTab("delete");
           }}
         />
-        {isEditing ? (
+        {tab === "edit" ? (
           <EditSingleToDo
-            handleEdit={handleEdit}
             handleEditCancel={() => {
-              setIsEditing(false);
+              setTab(null);
             }}
           />
         ) : null}
-        {isDeleting ? (
+        {tab === "delete" ? (
           <DeleteSingleToDo
-            handleDelete={handleDelete}
             handleDeleteCancel={() => {
-              setIsDeleting(false);
+              setTab(null);
             }}
           />
         ) : null}

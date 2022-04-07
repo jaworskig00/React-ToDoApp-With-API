@@ -1,10 +1,15 @@
 import { Formik, Form, Field } from "formik";
 
-const initialValues = {
-  description: "",
-};
+export const EditSingleToDo = ({ handleEditCancel }) => {
+  const initialValues = {
+    description: "",
+  };
 
-export const EditSingleToDo = ({ handleEdit, handleEditCancel }) => {
+  const handleEdit = () => {
+    handleEditCancel();
+    console.log("Task updated");
+  }; // obsługa edycji z api
+
   return (
     <aside className="min-w-full flex flex-col items-center">
       <Formik initialValues={initialValues} onSubmit={handleEdit}>
