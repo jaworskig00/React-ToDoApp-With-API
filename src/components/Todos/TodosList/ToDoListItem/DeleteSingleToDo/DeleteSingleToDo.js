@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Button } from "../../../../Button/Button";
 
 =======
@@ -6,6 +7,22 @@ import { Button } from "../../../../Button/Button";
 export const DeleteSingleToDo = ({ handleDeleteCancel }) => {
   const handleDelete = () => {
     handleDeleteCancel();
+=======
+import { useNavigate } from "react-router-dom";
+import { api } from "../../../../../utils/api";
+
+export const DeleteSingleToDo = ({ toDoId, handleDeleteCancel }) => {
+  const navigate = useNavigate();
+
+  const handleDelete = async () => {
+    try {
+      await api.delete(`/task/${toDoId}`);
+    } catch (err) {
+      console.error(err);
+      // return; -> przerwanie wykonywania funkcji 
+    }
+    navigate('/todos');
+>>>>>>> c0580f4 (Added editing and deleting todos with API)
     console.log("Task deleted");
   }; // obsługa usuwania z api
 

@@ -1,16 +1,28 @@
 import { Formik, Form, Field } from "formik";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Button } from "../../../../Button/Button";
 
 =======
 >>>>>>> 49f364d (Moved handle funcions to edit and delete components)
 export const EditSingleToDo = ({ handleEditCancel }) => {
+=======
+import { api } from "../../../../../utils/api";
+
+export const EditSingleToDo = ({ toDoId, description, handleEditCancel }) => {
+>>>>>>> c0580f4 (Added editing and deleting todos with API)
   const initialValues = {
-    description: "",
+    description: description,
   };
 
-  const handleEdit = () => {
+  const handleEdit = async (values) => {
+    try {
+    await api.put(`/task/${toDoId}`, { description: values.description });
+    } catch (err) {
+      console.error(err);
+      // return; -> przerwanie wykonywania funkcji
+    }
     handleEditCancel();
     console.log("Task updated");
   }; // obsługa edycji z api
