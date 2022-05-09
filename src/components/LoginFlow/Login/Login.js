@@ -1,11 +1,10 @@
-import { useContext } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { AuthContext } from "../../../utils/AuthProvider";
+import { AuthContext, useAuth } from "../../../utils/AuthProvider";
 
 function Login({ handleSwitch }) {
-  const auth = useContext(AuthContext);
+  const { signIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -16,12 +15,16 @@ function Login({ handleSwitch }) {
     password: "",
   };
 
+  const handleLogin = (values) => {
+    signIn(values.email, values.password);
+  }
+
   return (
     <div className="p-6 max-w-lg mx-auto bg-white rounded-xl shadow-lg items-center space-y-4">
       <aside className="border rounded-lg p-3">
         <Formik
           initialValues={initialValues}
-          onSubmit={auth.signIn}
+          onSubmit={handleLogin}
         >
           <Form className="min-w-max mx-auto flex items-center flex-col">
             <label className="text-2xl underline mx-auto" htmlFor="description">

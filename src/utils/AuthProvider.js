@@ -4,12 +4,14 @@ import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import { api } from "./api";
 import { Wrapper } from "../components/Wrapper/Wrapper";
 
-export const AuthContext = createContext({
+const AuthContext = createContext({
   isAuthenticated: false,
   handleRegisterSubmit: () => {},
   signIn: () => {},
   signOut: () => {},
 });
+
+export const useAuth = () => useContext(AuthContext);
 
 export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -18,13 +20,13 @@ export function AuthProvider({ children }) {
 
   const from = location.state?.from?.pathname || "/todos";
 
-  const handleRegisterSubmit = async (values) => {
+  const handleRegisterSubmit = async (name, email, password, age) => {
     try {
       const { data } = await api.post("/user/register", {
-        name: values.name,
-        email: values.email,
-        password: values.password,
-        age: values.age,
+        name: name,
+        email: email,
+        password: password,
+        age: age,
       });
       if (data.token) {
         localStorage.setItem("token", data.token);
@@ -34,11 +36,11 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const signIn = async (values) => {
+  const signIn = async (email, password) => {
     try {
       const { data } = await api.post("/user/login", {
-        email: values.email,
-        password: values.password,
+        email: email,
+        password: password,
       });
       if (data.token) {
         localStorage.setItem("token", data.token);
@@ -68,11 +70,11 @@ export function AuthProvider({ children }) {
 }
 
 export function RequireAuth({ children }) {
-  const auth = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
-  if (!auth.isAuthenticated) {
+  if (!isAuthenticated) {
     return (
       <Wrapper>
         <main className="flex flex-col items-center border rounded-lg p-3">
