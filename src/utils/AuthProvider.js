@@ -1,0 +1,99 @@
+import React, { useContext, createContext, useState } from "react";
+import { useLocation, useNavigate, Navigate } from "react-router-dom";
+
+import { api } from "./api";
+import { Wrapper } from "../components/Wrapper/Wrapper";
+
+const AuthContext = createContext({
+  isAuthenticated: false,
+  handleRegisterSubmit: () => {},
+  signIn: () => {},
+  signOut: () => {},
+});
+
+export const useAuth = () => useContext(AuthContext);
+
+export function AuthProvider({ children }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/todos";
+
+  const handleRegisterSubmit = async (name, email, password, age) => {
+    try {
+      const { data } = await api.post("/user/register", {
+        name: name,
+        email: email,
+        password: password,
+        age: age,
+      });
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const signIn = async (email, password) => {
+    try {
+      const { data } = await api.post("/user/login", {
+        email: email,
+        password: password,
+      });
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        setIsAuthenticated(true);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+    navigate(from, { replace: true });
+  };
+
+  const signOut = async () => {
+    try {
+      await api.post("/user/logout");
+      setIsAuthenticated(false);
+    } catch (err) {
+      console.error(err);
+    }
+
+    navigate("/");
+  };
+
+  const value = { isAuthenticated, handleRegisterSubmit, signIn, signOut };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+export function RequireAuth({ children }) {
+  const { isAuthenticated } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  if (!isAuthenticated) {
+    return (
+      <Wrapper>
+        <main className="flex flex-col items-center border rounded-lg p-3">
+          <span className="underline text-lg font-bold">
+            Please register or login first
+          </span>
+          <button
+            type="button"
+            className="px-3 py-1 m-2 text-sm text-purple-600 font-semibold border rounded-full border-purple-200 hover:text-white hover:bg-purple-600"
+            onClick={() =>
+              navigate("/", { state: { from: location }, replace: undefined })
+            }
+          >
+            Register/Login
+          </button>
+        </main>
+      </Wrapper>
+    );
+  }
+
+  return children;
+}
