@@ -9,8 +9,7 @@ import { DeleteSingleToDo } from "../components/Todos/TodosList/ToDoListItem/Del
 
 export const SingleToDoScreen = () => {
   const [todo, setTodo] = useState([]);
-  const [isEditing, setIsEditing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [tab, setTab] = useState(null);
 
   const { id } = useParams();
 
@@ -27,7 +26,7 @@ export const SingleToDoScreen = () => {
     };
 
     fetchTodo();
-  }, []);
+  }, [todo]);
 
   return (
     <Wrapper>
@@ -44,6 +43,8 @@ export const SingleToDoScreen = () => {
         />
         {tab === "edit" ? (
           <EditSingleToDo
+            toDoId={id}
+            description={todo.description}
             handleEditCancel={() => {
               setTab(null);
             }}
@@ -51,6 +52,7 @@ export const SingleToDoScreen = () => {
         ) : null}
         {tab === "delete" ? (
           <DeleteSingleToDo
+            toDoId={id}
             handleDeleteCancel={() => {
               setTab(null);
             }}

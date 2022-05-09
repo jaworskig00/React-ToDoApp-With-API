@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
+import { Button } from "../../../../Button/Button";
+
 export const ViewSingleToDo = ({ toDoId, toDo, handleEdit, handleDelete }) => {
   const navigate = useNavigate();
 
@@ -10,30 +12,15 @@ export const ViewSingleToDo = ({ toDoId, toDo, handleEdit, handleDelete }) => {
         {toDo.description}
       </span>
       <div>
-        <button
-          className="px-3 py-1 m-2 text-sm text-purple-600 font-semibold border rounded-full border-purple-200 hover:text-white hover:bg-purple-600"
-          onClick={() => {
-            handleEdit();
-          }}
-        >
-          Edit
-        </button>
-        <button
-          className="px-3 py-1 m-2 text-sm text-red-500 font-semibold border rounded-full border-red-200 hover:text-white hover:bg-red-500"
-          onClick={() => {
-            handleDelete();
-          }}
-        >
-          Delete
-        </button>
-        <button
-          className="px-3 py-1 m-2 text-sm text-blue-600 font-semibold border rounded-full border-blue-200 hover:text-white hover:bg-blue-600"
-          onClick={() => {
+        <Button text="Edit" style="submit" click={handleEdit} />
+        <Button text="Delete" style="cancel" click={handleDelete} />
+        <Button
+          text="Go back"
+          style="secondary"
+          click={() => {
             navigate("/todos");
           }}
-        >
-          Go back
-        </button>
+        />
       </div>
     </>
   );

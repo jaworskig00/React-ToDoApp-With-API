@@ -1,5 +1,7 @@
 import { Formik, Form, Field } from "formik";
 
+import { Button } from "../../../../Button/Button";
+
 export const EditSingleToDo = ({ handleEditCancel }) => {
   const initialValues = {
     description: "",
@@ -26,20 +28,8 @@ export const EditSingleToDo = ({ handleEditCancel }) => {
             />
           </div>
           <div>
-            <button
-              className="px-3 py-1 m-2 text-sm text-purple-600 font-semibold border rounded-full border-purple-200 hover:text-white hover:bg-purple-600"
-              type="submit"
-            >
-              Confirm
-            </button>
-            <button
-              className="px-3 py-1 m-2 text-sm text-red-500 font-semibold border rounded-full border-red-200 hover:text-white hover:bg-red-500"
-              onClick={() => {
-                handleEditCancel();
-              }}
-            >
-              Cancel
-            </button>
+            <Button text="Confirm" style="submit" type="submit" />
+            <Button text="Cancel" style="cancel" click={handleEditCancel} />
           </div>
         </Form>
       </Formik>

@@ -7,7 +7,9 @@ function LoginScreen() {
   const [currentTab, setCurrentTab] = useState("register");
 
   const handleSwitch = () => {
-    currentTab === "register" ? setCurrentTab("login") : setCurrentTab("register");
+    currentTab === "register"
+      ? setCurrentTab("login")
+      : setCurrentTab("register");
   };
 
   return (

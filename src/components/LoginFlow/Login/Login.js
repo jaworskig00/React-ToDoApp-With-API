@@ -1,7 +1,9 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { AuthContext, useAuth } from "../../../utils/AuthProvider";
+import { useAuth } from "../../../utils/AuthProvider";
+
+import { Button } from "../../Button/Button";
 
 function Login({ handleSwitch }) {
   const { signIn } = useAuth();
@@ -17,15 +19,12 @@ function Login({ handleSwitch }) {
 
   const handleLogin = (values) => {
     signIn(values.email, values.password);
-  }
+  };
 
   return (
     <div className="p-6 max-w-lg mx-auto bg-white rounded-xl shadow-lg items-center space-y-4">
       <aside className="border rounded-lg p-3">
-        <Formik
-          initialValues={initialValues}
-          onSubmit={handleLogin}
-        >
+        <Formik initialValues={initialValues} onSubmit={handleLogin}>
           <Form className="min-w-max mx-auto flex items-center flex-col">
             <label className="text-2xl underline mx-auto" htmlFor="description">
               Please login
@@ -44,22 +43,15 @@ function Login({ handleSwitch }) {
               placeholder="Password"
             />
             <br />
-            <button
-              className="px-3 py-1 m-2 text-sm text-purple-600 font-semibold border rounded-full border-purple-200 hover:text-white hover:bg-purple-600"
-              type="submit"
-            >
-              Login
-            </button>
-            <button
-              className="underline"
-              name="switchButton"
+            <Button text="Login" style="submit" type="submit" />
+            <Button
+              text="Register"
+              style="primary"
               type="button"
-              onClick={() => {
+              click={() => {
                 handleSwitch();
               }}
-            >
-              Register
-            </button>
+            />
           </Form>
         </Formik>
       </aside>
