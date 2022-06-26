@@ -1,14 +1,16 @@
 import { Formik, Form, Field } from "formik";
 
+import { api } from "../../../../../utils/api";
 import { Button } from "../../../../Button/Button";
 
-export const EditSingleToDo = ({ handleEditCancel }) => {
+export const EditSingleToDo = ({ toDoId, handleEditCancel }) => {
   const initialValues = {
     description: "",
   };
 
-  const handleEdit = () => {
+  const handleEdit = async (values) => {
     handleEditCancel();
+    await api.put("/task/" + toDoId, { description: values.description });
     console.log("Task updated");
   }; // obsługa edycji z api
 

@@ -1,8 +1,15 @@
+import { useNavigate } from "react-router-dom";
+
+import { api } from "../../../../../utils/api";
 import { Button } from "../../../../Button/Button";
 
-export const DeleteSingleToDo = ({ handleDeleteCancel }) => {
-  const handleDelete = () => {
+export const DeleteSingleToDo = ({ toDoId, handleDeleteCancel }) => {
+  const navigate = useNavigate();
+
+  const handleDelete = async () => {
     handleDeleteCancel();
+    await api.delete("/task/" + toDoId);
+    navigate("/todos");
     console.log("Task deleted");
   }; // obsługa usuwania z api
 
