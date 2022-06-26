@@ -16,7 +16,7 @@ export const publicApi = axios.create({
 const defaultOptions = {
   baseURL: "https://api-nodejs-todolist.herokuapp.com/",
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 };
 
@@ -25,7 +25,7 @@ export const api = axios.create(defaultOptions);
 
 // Set the AUTH token for any request
 api.interceptors.request.use(function (config) {
-  const token = localStorage.getItem('token');
-  config.headers.Authorization =  token ? `Bearer ${token}` : '';
+  const token = localStorage.getItem("token");
+  config.headers.Authorization = token ? `Bearer ${token}` : "";
   return config;
 });

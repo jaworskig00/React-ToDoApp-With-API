@@ -1,5 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
+import { Button } from "../../Button/Button";
+
 export const AddToDoFrom = ({ initialValues, handleSubmit }) => {
   return (
     <aside className="border rounded-lg p-3">
@@ -15,12 +17,7 @@ export const AddToDoFrom = ({ initialValues, handleSubmit }) => {
             type="text"
             placeholder="Description"
           />
-          <button
-            className="px-3 py-1 m-2 text-sm text-purple-600 font-semibold border rounded-full border-purple-200 hover:text-white hover:bg-purple-600"
-            type="submit"
-          >
-            Add
-          </button>
+          <Button text="Add" style="submit" type="submit" />
         </Form>
       </Formik>
     </aside>

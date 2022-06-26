@@ -5,5 +5,5 @@ export const BlankScreen = () => {
         <h1 className="text-8xl text-black mx-auto">Nothing here!</h1>
       </div>
     </>
-  )
-}
+  );
+};

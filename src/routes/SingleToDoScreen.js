@@ -3,9 +3,13 @@ import { useParams } from "react-router-dom";
 
 import { api } from "../utils/api";
 import { Wrapper } from "../components/Wrapper/Wrapper";
+import { ViewSingleToDo } from "../components/Todos/TodosList/ToDoListItem/ViewSingleToDo/ViewSingleToDo";
+import { EditSingleToDo } from "../components/Todos/TodosList/ToDoListItem/EditSingleToDo/EditSingleToDo";
+import { DeleteSingleToDo } from "../components/Todos/TodosList/ToDoListItem/DeleteSingleToDo/DeleteSingleToDo";
 
 export const SingleToDoScreen = () => {
   const [todo, setTodo] = useState([]);
+  const [tab, setTab] = useState(null);
 
   const { id } = useParams();
 
@@ -22,17 +26,38 @@ export const SingleToDoScreen = () => {
     };
 
     fetchTodo();
-  }, []);
+  }, [todo]);
 
   return (
     <Wrapper>
       <main className="flex flex-col items-center">
-        <span className="underline text-lg font-bold">
-          ToDo ID: {id}
-        </span>
-        <span className="bg-orange-200 rounded-full m-1 pl-2 py-0.5 min-w-full text-center">
-          {todo.description}
-        </span>
+        <ViewSingleToDo
+          toDoId={id}
+          toDo={todo}
+          handleEdit={() => {
+            setTab("edit");
+          }}
+          handleDelete={() => {
+            setTab("delete");
+          }}
+        />
+        {tab === "edit" ? (
+          <EditSingleToDo
+            toDoId={id}
+            description={todo.description}
+            handleEditCancel={() => {
+              setTab(null);
+            }}
+          />
+        ) : null}
+        {tab === "delete" ? (
+          <DeleteSingleToDo
+            toDoId={id}
+            handleDeleteCancel={() => {
+              setTab(null);
+            }}
+          />
+        ) : null}
       </main>
     </Wrapper>
   );
